@@ -1,0 +1,31 @@
+filebeat inputs:
+- type: filestream
+  id: my-filestream-id
+  enable: false
+
+filebeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: yes
+
+setup.template.settings:
+  index.number_of_shards: 1
+
+setup.kibana
+  host: "localhost:5601"
+
+output.elasticsearch:
+  hosts: ["localhost:9200"]
+  preset: balanced
+  ssl.verification_mode: 'certificate'
+  protocol: "https"
+
+  username: "elastic"
+  password: "ZZwsAQbL-U5rPwF8TAVl"
+  ssl.ca_trusted_fingerprint: "C7B70360931F64E3F19D19021079EE19BE8432D969B13ED29F29B750486AD733"
+
+  processors:
+    - add_host_metadata:
+        when.not.contains.tags: forwarded
+    - add_cloud_metadata: ~
+    - add_docker_metadata: ~
+    - add_kubernetes_metadata: ~
