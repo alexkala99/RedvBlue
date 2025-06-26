@@ -1,0 +1,20 @@
+logging:
+  appenders:
+    file:
+      type: file
+      fileName: /var/log/kibana/kibana.log
+      layout:
+        type: json
+  root:
+    appenders:
+      - default
+      - file
+pid.file: /run/kibana/kibana.pid
+
+elasticsearch.hosts: [https://192.168.202.147:9200]
+elasticsearch.serviceAccountToken: AAEEAAWVsYXN9aWMva2liYW5hL2Vucm9sbC1wcm9jZXNzLXRva2VuLTE3NDc1NjgzMzg4NDI6ZVgxak9EeFNUcW1D1lF3VE9nemRrUQ
+elasticsearch.ssl.certificateAuthorities: [/var/lib/kibana/ca_1747568339450.crt]
+xpack.fleet.outputs: [{id: fleet-default-output, name: default, is_default: true, is_default_monitoring: true, type: elasticsearch, hosts: [https://192.168.202.147:9200], ca_trusted_fingerprint: c7b70360931f64e3f19d19021079ee19be8432d969b13ed29f29b750486ad733}]
+
+elasticsearch.ssl.verificationMode: full
+xpack.encryptedSavedObjects.encryptionKey: "xjhTAkgoHp8/1A6Aks5K6jf0JA4nqrsa"
